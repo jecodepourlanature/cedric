@@ -150,7 +150,7 @@ class cedric_doc {
 		$chemin = CEDRIC_URL_BASE.$this->pdf_path();
 		$entetes['From'] = CEDRIC_MAIL_FROM;
 		$entetes['To'] = $destinataire;
-		$entetes['Subject'] = "[CEDRIC] {$this->type_document} : {$this->etablissement}";
+		$entetes['Subject'] = "[CEDRIC-{$this->departement}] {$this->type_document} : {$this->etablissement}";
 		$parametres['sendmail_path'] = '/usr/lib/sendmail';
 
 		$corps_html = "
