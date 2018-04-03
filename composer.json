@@ -1,0 +1,9 @@
+{
+  "autoload": {
+    "psr-4": { "ND\\Cedric\\": "src/" }
+  },
+  "require": {
+    "propel/propel": "~2.0@dev",
+    "guzzlehttp/guzzle": "^6.3"
+  }
+}
