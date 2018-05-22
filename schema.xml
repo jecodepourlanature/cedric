@@ -1,0 +1,64 @@
+<!--
+Copyright (C) 2018 Nicolas Damiens nicolas@damiens.info
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<database name="default" defaultIdMethod="native"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://xsd.propelorm.org/1.6/database.xsd"
+          namespace="ND\Cedric\Propel"
+        >
+
+	<table name="installation" phpName="InstallationClassee">
+		<column name="id" type="varchar" size="10" primaryKey="true"/>
+		<column name="nom_etablissement" type="varchar" size="255" />
+		<column name="code_postal" type="varchar" size="5"/>
+		<column name="commune" type="varchar" size="255"/>
+		<column name="departement" type="varchar" size="3" />
+		<column name="regime" type="varchar" size="20"/>
+		<column name="seveso" type="boolean" />
+		<column name="etat_activite" type="varchar" size="50" />
+		<column name="priorite_nationale" type="boolean" />
+		<column name="IEDMTD" type="boolean" />
+	</table>
+
+  <table name="installation_categorie" phpName="InstallationClasseeCategorie">
+    <column name="id" type="varchar" size="64" required="true" primaryKey="true" autoIncrement="false"/>
+    <column name="installation_id" type="varchar" size="10" primaryKey="true"/>
+    <foreign-key foreignTable="installation" phpName="InstallationClassee" refPhpName="InstallationClasseeCatQuery">
+      <reference local="installation_id" foreign="id"/>
+    </foreign-key>
+    <column name="rubrique_ic" type="integer"/>
+    <column name="alinea" type="varchar" size="10"/>
+    <column name="date_autorisation" type="date" />
+    <column name="etat_activite" type="varchar" size="50" />
+    <column name="regime" type="varchar" size="100" />
+    <column name="activite" type="varchar" size="255" />
+    <column name="volume" type="integer" />
+    <column name="unite" type="varchar" size="10" />
+  </table>
+
+  <table name="installation_docs" phpName="InstallationDoc">
+    <column name="id" type="varchar" size="64" required="true" primaryKey="true" autoIncrement="false"/>
+    <column name="date_doc" type="date" />
+    <column name="installation_id" type="varchar" size="10" primaryKey="true"/>
+    <foreign-key foreignTable="installation" phpName="InstallationClassee" refPhpName="InstallationClasseeDocQuery">
+      <reference local="installation_id" foreign="id"/>
+    </foreign-key>
+    <column name="type_doc" type="varchar" size="60" />
+    <column name="url_doc" type="varchar" size="255" />
+    <column name="titre_doc" type="varchar" size="250" />
+    <column name="description" type="varchar" size="255" />
+  </table>
+</database>
