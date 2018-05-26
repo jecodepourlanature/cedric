@@ -1,0 +1,561 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" lang="fr">
+<head>
+<meta name="robots" content="none" />
+<title>Fiche &eacute;tablissement - Inspection des Installations Classées</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+<meta name="generator" content="SPIP 2.1.19 [19922]" />
+
+
+<link rel="shortcut icon" type="image/png" href="squelettes-dist/favicon.png" />
+
+
+<link rel="stylesheet" href="squelettes-dist/habillageMedd.css" type="text/css" media="projection, screen, tv, print" />
+
+
+<link rel='stylesheet' type='text/css' media='all' href='extensions/porte_plume/css/barre_outils.css' />
+<link rel='stylesheet' type='text/css' media='all' href='http://www.installationsclassees.developpement-durable.gouv.fr/spip.php?page=barre_outils_icones.css' />
+
+<script src="prive/javascript/jquery.js" type="text/javascript"></script>
+
+<script src="prive/javascript/jquery.form.js" type="text/javascript"></script>
+
+<script src="prive/javascript/ajaxCallback.js" type="text/javascript"></script>
+
+<script src="prive/javascript/jquery.cookie.js" type="text/javascript"></script>
+<!-- insert_head --><!--[if lt IE 7]>
+	<script src='extensions/msie_compat/javascript/jquery.ifixpng.js'></script>
+	<script type='text/javascript'>//<![CDATA[
+		jQuery.ifixpng('rien.gif');		
+		function fixie() {
+			jQuery('img').ifixpng();
+		}
+		$(document).ready(function() { fixie(); });
+		onAjaxLoad(fixie);	
+	//]]></script>
+<![endif]-->
+<script type='text/javascript' src='extensions/porte_plume/javascript/xregexp-min.js'></script>
+<script type='text/javascript' src='extensions/porte_plume/javascript/jquery.markitup_pour_spip.js'></script>
+<script type='text/javascript' src='extensions/porte_plume/javascript/jquery.previsu_spip.js'></script>
+<script type='text/javascript' src='http://www.installationsclassees.developpement-durable.gouv.fr/spip.php?page=porte_plume_start.js&amp;lang=fr'></script>
+<script>
+  function afficherPageRecherche(){
+    document.forms["etablissement"].action = "rechercheIC.php";
+    document.forms["etablissement"].submit();
+  }
+
+  function afficherFicheEtablImp(){
+    document.forms["etablissement"].action = "ficheEtablissementImp.php";
+    document.forms["etablissement"].submit();
+  };
+</script>
+
+</head>
+<body class="page_accueil">
+<div id="divPrincipal" align=center>
+<div id="divCentral">
+<div id="divBandeauLogo">
+	<div id="divCellBandeauLogoLogo">
+			<a target="_blank" href="http://www.ecologie.gouv.fr" title="Site du Ministère de l'écologie, du développement durable et de l'énergie"><img src="images/logoMedd.gif"></a>
+	</div>
+	<div id="divCellBandeauLogoDroite">
+		<div id="divCellBandeauLogoHaut">
+			<div id="divCellBandeauLogoTitre" valign=center>
+					<!--<img src="images/titre.gif">--><a id="lienAccueil" href="http://www.installationsclassees.developpement-durable.gouv.fr/accueil.php" title="Page d'accueil"><span></span></a>
+			</div>
+			<div id="divCellBandeauLogoFormrech" align="right"> 
+				<form action="http://www.installationsclassees.developpement-durable.gouv.fr/recherche.php" method="get"><input name='page' value='0' type='hidden' />
+					<span><input class="rechercheBandeau" name="recherche" id="recherche" value="              Recherche" type="text"  onfocus="this.value='';"/><input id="boutonRecherche" type="submit" value=""/></span><br>
+					<a id="lienRechercheAvancee" href="http://www.installationsclassees.developpement-durable.gouv.fr/recherche.php">Recherche avancée</a>				
+				</form>
+			</div>
+			<div class="spacer">&nbsp;</div>
+		</div>
+		<div id="divBandeauRubriques">
+			<div id="ligneRubrique">
+	<div align=center class="boutonRubriqueInactif"><a class="lienboutonRubriqueInactif" href="http://www.installationsclassees.developpement-durable.gouv.fr/-Generalites-.html">Généralités</a></div>
+	<div class="divBandeauRubriqueSeparation"></div>
+	<div align=center class="boutonRubriqueInactif"><a class="lienboutonRubriqueInactif" href="http://www.installationsclassees.developpement-durable.gouv.fr/-Thematiques-.html">Thématiques</a></div>
+	<div class="divBandeauRubriqueSeparation"></div>
+	<div align=center class="boutonRubriqueInactif"><a class="lienboutonRubriqueInactif" href="http://www.installationsclassees.developpement-durable.gouv.fr/-Secteurs-.html">Secteurs</a></div>
+	<div class="divBandeauRubriqueSeparation"></div>
+	<div align=center class="boutonRubriqueInactif"><a class="lienboutonRubriqueInactif" href="http://www.installationsclassees.developpement-durable.gouv.fr/-Reglementation-.html">Réglementation</a></div>
+	<div class="divBandeauRubriqueSeparation"></div>
+	<div align=center class="boutonRubriqueInactif"><a class="lienboutonRubriqueInactif" href="http://www.installationsclassees.developpement-durable.gouv.fr/-Formulaires-.html">Formulaires</a></div>
+	<div class="divBandeauRubriqueSeparation"></div>
+	<div align=center class="boutonRubriqueActif"><a class="lienboutonRubriqueActif" href="http://www.installationsclassees.developpement-durable.gouv.fr/rechercheICForm.php">Base des installations classées</a></div>
+</div>
+<div class="spacer">&nbsp;</div>		</div>
+	</div>
+</div><div id="divHierarchie">
+<div id="divPointInterrogation"></div>
+<div id="divLiensHierarchie">Vous êtes ici : <a class="LienHierarchie" href="http://www.installationsclassees.developpement-durable.gouv.fr/accueil.php">Accueil</a> &gt;
+<a class="LienHierarchie" href="http://www.installationsclassees.developpement-durable.gouv.fr/rechercheICForm.php">Recherche des Installations Classées</a> &gt;
+<a class="LienHierarchie" href="#" onclick="afficherPageRecherche()">Résultats</a> &gt;
+Fiche établissement
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+<div id="corpsPage">
+<div id="menuGauche">
+<a href="http://www.installationsclassees.developpement-durable.gouv.fr/rechercheICForm.php" class="titreMenuGaucheBI"><img src="images/BoutonBI.png"></a><br>
+<a href="http://www.installationsclassees.developpement-durable.gouv.fr/spip.php?rubrique981" class="titreMenuGaucheBI"><img style="margin: 8px 0 0 0; height:50px" src="images/EspacePPRT.png"></a><br>
+
+
+
+
+<!--UdmComment-->
+<div id="divMenuSecteurs">
+	
+	
+	<div class="divTitreMenuGaucheJaune">
+		<div class="hautDroitJaune"></div><div class="hautGaucheJaune"></div>
+		<a href="-Generalites-.html" class="titreMenuGauche">Généralités</a>
+	</div>
+	<div class="contenuMenuSecteurJaune">
+			
+			<ul>
+				
+				
+
+						<div class="divMenuGaucheJaune"><li class="listeMenuGaucheJaune"><a href="-Les-services-d-inspection-.html" class="lienMenuGaucheJaune">Services d’inspection</a></li></div>
+
+				
+
+						<div class="divMenuGaucheJaune"><li class="listeMenuGaucheJaune"><a href="-Installation-classee-.html" class="lienMenuGaucheJaune">Installation classée&nbsp;: principes</a></li></div>
+
+				
+
+						<div class="divMenuGaucheJaune"><li class="listeMenuGaucheJaune"><a href="-La-declaration-par-teleservice-.html" class="lienMenuGaucheJaune">La déclaration par téléservice</a></li></div>
+
+				
+
+						<div class="divMenuGaucheJaune"><li class="listeMenuGaucheJaune"><a href="-Regime-d-enregistrement-.html" class="lienMenuGaucheJaune">Régime d&#8217;enregistrement</a></li></div>
+
+				
+
+						<div class="divMenuGaucheJaune"><li class="listeMenuGaucheJaune"><a href="-Regime-d-autorisation-.html" class="lienMenuGaucheJaune">Régime d’autorisation</a></li></div>
+
+				
+
+						<div class="divMenuGaucheJaune"><li class="listeMenuGaucheJaune"><a href="-L-autorisation-unique-.html" class="lienMenuGaucheJaune">L&#8217;autorisation unique</a></li></div>
+
+				
+
+						<div class="divMenuGaucheJaune"><li class="listeMenuGaucheJaune"><a href="-L-etude-d-impact-.html" class="lienMenuGaucheJaune">L&#8217;étude d&#8217;impact</a></li></div>
+
+				
+
+						<div class="divMenuGaucheJaune"><li class="listeMenuGaucheJaune"><a href="-L-etude-de-dangers-.html" class="lienMenuGaucheJaune">L&#8217;étude de dangers</a></li></div>
+
+				
+
+						<div class="divMenuGaucheJaune"><li class="listeMenuGaucheJaune"><a href="-Surveillance-par-l-exploitant-.html" class="lienMenuGaucheJaune">Surveillance par l’exploitant</a></li></div>
+
+				
+
+						<div class="divMenuGaucheJaune"><li class="listeMenuGaucheJaune"><a href="-Controles-par-l-inspection-et-.html" class="lienMenuGaucheJaune">Contrôles de l’inspection</a></li></div>
+
+				
+
+						<div class="divMenuGaucheJaune"><li class="listeMenuGaucheJaune"><a href="-Aspects-financiers-.html" class="lienMenuGaucheJaune">Aspects financiers</a></li></div>
+
+				
+
+						<div class="divMenuGaucheJaune"><li class="listeMenuGaucheJaune"><a href="-Responsabilite-et-contentieux-.html" class="lienMenuGaucheJaune">Responsabilité et contentieux</a></li></div>
+
+				
+
+						<div class="divMenuGaucheJaune"><li class="listeMenuGaucheJaune"><a href="-Information-du-public-.html" class="lienMenuGaucheJaune">Information du public</a></li></div>
+
+				
+
+						<div class="divMenuGaucheJaune"><li class="listeMenuGaucheJaune"><a href="-Elaboration-de-la-reglementation-.html" class="lienMenuGaucheJaune">Elaboration de la réglementation</a></li></div>
+
+				
+
+						<div class="divMenuGaucheJaune"><li class="listeMenuGaucheJaune"><a href="-Echanges-internationaux-.html" class="lienMenuGaucheJaune">Echanges internationaux</a></li></div>
+
+				
+			</ul>
+				
+	</div>
+	<div class="basJaune"><div class="basDroitJaune"></div><div class="basGaucheJaune"></div></div>
+	
+
+
+	
+	
+	<div class="divTitreMenuGaucheVert">
+		<div class="hautDroitVert"></div><div class="hautGaucheVert"></div>
+		<a href="-Thematiques-.html" class="titreMenuGauche">Thématiques</a>
+	</div>
+	<div class="contenuMenuSecteurVert">
+			
+			<ul>
+				
+				
+
+						<div class="divMenuGaucheVert"><li class="listeMenuGaucheVert"><a href="-Air-.html" class="lienMenuGaucheVert">Air</a></li></div>
+
+				
+
+						<div class="divMenuGaucheVert"><li class="listeMenuGaucheVert"><a href="-Bruit-et-vibrations-.html" class="lienMenuGaucheVert">Bruit et vibrations</a></li></div>
+
+				
+
+						<div class="divMenuGaucheVert"><li class="listeMenuGaucheVert"><a href="-Dechets-.html" class="lienMenuGaucheVert">Déchets</a></li></div>
+
+				
+
+						<div class="divMenuGaucheVert"><li class="listeMenuGaucheVert"><a href="-Directive-IED-Industrial-Emissions-.html" class="lienMenuGaucheVert">Directive IED (Industrial Emissions Directive) - BREF</a></li></div>
+
+				
+
+						<div class="divMenuGaucheVert"><li class="listeMenuGaucheVert"><a href="-Eau-.html" class="lienMenuGaucheVert">Eau</a></li></div>
+
+				
+
+						<div class="divMenuGaucheVert"><li class="listeMenuGaucheVert"><a href="-Impact-sanitaires-.html" class="lienMenuGaucheVert">Impacts sanitaires</a></li></div>
+
+				
+
+						<div class="divMenuGaucheVert"><li class="listeMenuGaucheVert"><a href="-Radioprotection-.html" class="lienMenuGaucheVert">Radioprotection</a></li></div>
+
+				
+
+						<div class="divMenuGaucheVert"><li class="listeMenuGaucheVert"><a href="-Risque-accidentel-.html" class="lienMenuGaucheVert">Risques accidentels</a></li></div>
+
+				
+
+						<div class="divMenuGaucheVert"><li class="listeMenuGaucheVert"><a href="-Risques-naturels-.html" class="lienMenuGaucheVert">Risques naturels</a></li></div>
+
+				
+
+						<div class="divMenuGaucheVert"><li class="listeMenuGaucheVert"><a href="-Sites-et-sols-pollues-.html" class="lienMenuGaucheVert">Sites et sols pollués</a></li></div>
+
+				
+
+						<div class="divMenuGaucheVert"><li class="listeMenuGaucheVert"><a href="-Substances-et-preparations-.html" class="lienMenuGaucheVert">Substances et préparations chimiques</a></li></div>
+
+				
+			</ul>
+			
+	</div>
+	<div class="basVert"><div class="basDroitJaune"></div><div class="basGaucheVert"></div></div>
+	
+
+
+	
+	
+	<div class="divTitreMenuGaucheRouge">
+		<div class="hautDroitRouge"></div><div class="hautGaucheRouge"></div>
+		<a href="-Secteurs-.html" class="titreMenuGauche">Secteurs</a>
+	</div>
+	<div class="contenuMenuSecteurRouge">
+			
+			<ul>
+				
+				
+
+						<div class="divMenuGaucheRouge"><li class="listeMenuGaucheRouge"><a href="-Activites-des-soins-.html" class="lienMenuGaucheRouge">Activités de soins</a></li></div>
+
+				
+
+						<div class="divMenuGaucheRouge"><li class="listeMenuGaucheRouge"><a href="-Agriculture-.html" class="lienMenuGaucheRouge">Agriculture</a></li></div>
+
+				
+
+						<div class="divMenuGaucheRouge"><li class="listeMenuGaucheRouge"><a href="-Agroalimentaire-boissons-.html" class="lienMenuGaucheRouge">Agroalimentaire, boissons</a></li></div>
+
+				
+
+						<div class="divMenuGaucheRouge"><li class="listeMenuGaucheRouge"><a href="-Bois-papier-carton-imprimerie-.html" class="lienMenuGaucheRouge">Bois, papier, carton, imprimerie</a></li></div>
+
+				
+
+						<div class="divMenuGaucheRouge"><li class="listeMenuGaucheRouge"><a href="-Carrieres-.html" class="lienMenuGaucheRouge">Carrières</a></li></div>
+
+				
+
+						<div class="divMenuGaucheRouge"><li class="listeMenuGaucheRouge"><a href="-Chimie-.html" class="lienMenuGaucheRouge">Chimie</a></li></div>
+
+				
+
+						<div class="divMenuGaucheRouge"><li class="listeMenuGaucheRouge"><a href="-Energie-.html" class="lienMenuGaucheRouge">Energie</a></li></div>
+
+				
+
+						<div class="divMenuGaucheRouge"><li class="listeMenuGaucheRouge"><a href="-Entrepots-commerces-.html" class="lienMenuGaucheRouge">Entrepôts, commerces</a></li></div>
+
+				
+
+						<div class="divMenuGaucheRouge"><li class="listeMenuGaucheRouge"><a href="-Eoliennes-.html" class="lienMenuGaucheRouge">Eoliennes</a></li></div>
+
+				
+
+						<div class="divMenuGaucheRouge"><li class="listeMenuGaucheRouge"><a href="-Industrie-minerale-.html" class="lienMenuGaucheRouge">Industrie minérale</a></li></div>
+
+				
+
+						<div class="divMenuGaucheRouge"><li class="listeMenuGaucheRouge"><a href="-Chimie-parachimie-caoutchouc-.html" class="lienMenuGaucheRouge">Pétrole et gaz</a></li></div>
+
+				
+
+						<div class="divMenuGaucheRouge"><li class="listeMenuGaucheRouge"><a href="-Siderurgie-metallurgie-.html" class="lienMenuGaucheRouge">Sidérurgie, métallurgie</a></li></div>
+
+				
+
+						<div class="divMenuGaucheRouge"><li class="listeMenuGaucheRouge"><a href="-10-Textiles-cuirs-et-peaux-.html" class="lienMenuGaucheRouge">Textiles, cuirs et peaux</a></li></div>
+
+				
+
+						<div class="divMenuGaucheRouge"><li class="listeMenuGaucheRouge"><a href="-Traitement-des-dechets-.html" class="lienMenuGaucheRouge">Traitement des déchets</a></li></div>
+
+				
+			</ul>
+			
+	</div>
+	<div class="basRouge"><div class="basDroitRouge"></div><div class="basGaucheRouge"></div></div>
+	
+
+
+	
+	<div class="divTitreMenuGaucheJaune2">
+		<div class="hautDroitJaune"></div><div class="hautGaucheJaune"></div>
+		<a href="" class="titreMenuGauche">Tous nos sites</a>
+	</div>
+	<div class="contenuMenuSecteurJaune">
+			<ul>
+
+				<div class="divMenuGaucheJaune">
+				<li class="listeMenuGaucheJaune"><a target="_blank" href="http://www.ecologie.gouv.fr" class="lienMenuGaucheJaune">MEDDE</a></li>
+				</div>
+
+				<div class="divMenuGaucheJaune">
+				<li class="listeMenuGaucheJaune"><a target="_blank" href="http://www.ineris.fr/aida" class="lienMenuGaucheJaune" title="Réglementation relative aux installations classées">AIDA</a></li>
+				</div>
+
+				<div class="divMenuGaucheJaune">
+				<li class="listeMenuGaucheJaune"><a target="_blank" href="http://www.pollutionsindustrielles.ecologie.gouv.fr/IREP/index.php" class="lienMenuGaucheJaune">Emissions Polluantes (IREP)</a></li>
+				</div>
+
+				<div class="divMenuGaucheJaune">
+				<li class="listeMenuGaucheJaune"><a target="_blank" href="http://www.sites-pollues.developpement-durable.gouv.fr" class="lienMenuGaucheJaune">Portail SITES-POLLUES</a></li>
+				</div>
+
+				<div class="divMenuGaucheJaune">
+				<li class="listeMenuGaucheJaune"><a target="_blank" href="http://basol.ecologie.gouv.fr" class="lienMenuGaucheJaune">BASOL</a></li>
+				</div>
+
+				<div class="divMenuGaucheJaune">
+				<li class="listeMenuGaucheJaune"><a target="_blank" href="http://basias.brgm.fr" class="lienMenuGaucheJaune">BASIAS</a></li>
+				</div>
+
+				<div class="divMenuGaucheJaune">
+				<li class="listeMenuGaucheJaune"><a target="_blank" href="http://www.prim.net" class="lienMenuGaucheJaune">PRIM NET</a></li>
+				</div>
+
+				<div class="divMenuGaucheJaune">
+				<li class="listeMenuGaucheJaune"><a target="_blank" href="http://www.aria.developpement-durable.gouv.fr/" class="lienMenuGaucheJaune" title="Inventaire des accidents technologiques et industriels">ARIA</a></li>
+				</div>
+
+				<div class="divMenuGaucheJaune">
+				<li class="listeMenuGaucheJaune"><a target="_blank" href="https://gidaf.developpement-durable.gouv.fr/" class="lienMenuGaucheJaune" title="Gestion informatisée des données d'autosurveillance fréquente">GIDAF</a></li>
+				</div>
+
+
+			</ul>
+	</div>
+	<div class="basJaune"><div class="basDroitJaune"></div><div class="basGaucheJaune"></div></div>
+	<div style="text-align:center;"><br><br></div>
+	<div id="adresseMEDD">
+	</div>
+</div>
+<br>
+<!--/UdmComment--></div>
+<div id="contenu">
+
+<form name="etablissement" id="etablissement" action="rechercheICForm.php" method="get">
+<!--
+R&eacute;gion = -->
+<div id="centre">
+<div class="titrePageRecherche">Fiche de l'établissement</div><div class="feuilleVerte"></div>
+<div class="spacer">&nbsp;</div>
+<br>
+
+  <INPUT type="hidden" name="selectRegion" value="" />
+  <INPUT type="hidden" name="selectDept" value="-1" />
+  <INPUT type="hidden" name="champcommune" value="" />
+  <INPUT type="hidden" name="champNomEtabl" value="" />
+  <INPUT type="hidden" name="selectRegSeveso" value="-1" />
+  <INPUT type="hidden" name="selectRegEtab" value="-1" />
+  <INPUT type="hidden" name="selectPrioriteNat" value="-1" />
+  <INPUT type="hidden" name="selectIPPC" value="-1" />
+  <INPUT type="hidden" name="champActivitePrinc" value="-1" />
+  <INPUT type="hidden" name="champListeIC" value="" />
+  <INPUT type="hidden" name="selectDeclaEmi" value="" />
+  <INPUT type="hidden" name="champEtablBase" value="51" />
+  <INPUT type="hidden" name="champEtablNumero" value="809" />
+  <INPUT type="hidden" name="ordre" value="" />
+<h2>Nom : SOGAL</h2>
+<div class="contenuArticle">
+Adresse d'exploitation :<br />6 rue de la gare<br />lieudit 'petit hennicourt'<br />60220 ABANCOURT<br /><br />Activit&eacute; principale : <br>
+Etat d'activit&eacute; : En fonctionnement<br>
+Service d'inspection : DREAL<br>
+Num&eacute;ro inspection : 0051.00809<br>
+Derni&egrave;re inspection : 12/07/2016<br><br>
+R&eacute;gime : Autorisation<br>
+Statut Seveso : Non Seveso<br>
+Priorit&eacute; nationale : Non<br>
+IED-MTD : Non<br>
+</div><h2>Situation administrative</h2><br><div class="listeEtabl"><table cellpadding="2px" class="listeEtabl" summary="liste des r&eacute;sultats" border="1">
+	<tr class="listeEtablenTete">
+		<th title="Rubrique IC">Rubri. IC</td>
+		<th title="Alin&eacute;a">Ali.&nbsp;</td>
+		<th title="Date d'autorisation">Date auto.</td>
+		<th >Etat d'activit&eacute;</td>
+		<th title="R&eacute;gime">R&eacute;g.</td>
+		<th >Activit&eacute;</td>
+		<th >Volume</td>
+		<th >Unit&eacute;</td>
+	</tr>
+	<tr class="listeEtabl1">
+		<td ><a target="_blank" href="http://www.ineris.fr/aida/textes/nomenclature/rubriques/rub_1155.htm">1155</a></td>
+		<td >&nbsp;</td>
+		<td >11/06/1999</td>
+		<td title="A l'arrêt">A l'arrêt</td>
+		<td >NC</td>
+		<td >AGRO-PHARMACEUTIQUES (DEPOTS)</td>
+		<td align="right" >6</td>
+		<td >t</td>
+	</tr>
+	<tr class="listeEtabl2">
+		<td ><a target="_blank" href="http://www.ineris.fr/aida/textes/nomenclature/rubriques/rub_1432.htm">1432</a></td>
+		<td >&nbsp;</td>
+		<td >11/06/1999</td>
+		<td title="A l'arrêt">A l'arrêt</td>
+		<td >NC</td>
+		<td >Liquides inflammables (stockage)</td>
+		<td align="right" >4</td>
+		<td >m3</td>
+	</tr>
+	<tr class="listeEtabl1">
+		<td ><a target="_blank" href="http://www.ineris.fr/aida/textes/nomenclature/rubriques/rub_1434.htm">1434</a></td>
+		<td >&nbsp;</td>
+		<td >11/06/1999</td>
+		<td title="A l'arrêt">A l'arrêt</td>
+		<td >NC</td>
+		<td >Liquides inflammables (remplissage ou distribution) autres que 1435</td>
+		<td align="right" >0,400</td>
+		<td >m3/h</td>
+	</tr>
+	<tr class="listeEtabl2">
+		<td ><a target="_blank" href="http://www.ineris.fr/aida/textes/nomenclature/rubriques/rub_1530.htm">1530</a></td>
+		<td >3</td>
+		<td >05/08/2011</td>
+		<td title="En fonctionnement">En fonct.</td>
+		<td >D</td>
+		<td >Papiers, cartons ou analogues (dépôt de) hors ERP</td>
+		<td align="right" >1160</td>
+		<td >m3</td>
+	</tr>
+	<tr class="listeEtabl1">
+		<td ><a target="_blank" href="http://www.ineris.fr/aida/textes/nomenclature/rubriques/rub_1532.htm">1532</a></td>
+		<td >&nbsp;</td>
+		<td >05/08/2011</td>
+		<td title="En fonctionnement">En fonct.</td>
+		<td >NC</td>
+		<td >Bois sec ou matériaux combustibles analogues (dépôt de)</td>
+		<td align="right" >640</td>
+		<td >&nbsp;</td>
+	</tr>
+	<tr class="listeEtabl2">
+		<td ><a target="_blank" href="http://www.ineris.fr/aida/textes/nomenclature/rubriques/rub_211.htm">211</a></td>
+		<td >B1b</td>
+		<td >05/08/2011</td>
+		<td title="En fonctionnement">En fonct.</td>
+		<td >D</td>
+		<td >GAZ COMBUSTIBLES LIQUEFIES (DEPOTS)</td>
+		<td align="right" >18</td>
+		<td >m3</td>
+	</tr>
+	<tr class="listeEtabl1">
+		<td ><a target="_blank" href="http://www.ineris.fr/aida/textes/nomenclature/rubriques/rub_2160.htm">2160</a></td>
+		<td >1b</td>
+		<td >05/08/2011</td>
+		<td title="En fonctionnement">En fonct.</td>
+		<td >DC</td>
+		<td >SILOS DE STOCKAGE DE CEREALES, GRAINS, ETC DEGAGEANT DES POUSSIERES INFLAMMABLES</td>
+		<td align="right" >14275</td>
+		<td >m3</td>
+	</tr>
+	<tr class="listeEtabl2">
+		<td ><a target="_blank" href="http://www.ineris.fr/aida/textes/nomenclature/rubriques/rub_2260.htm">2260</a></td>
+		<td >2a</td>
+		<td >05/08/2011</td>
+		<td title="En fonctionnement">En fonct.</td>
+		<td >A</td>
+		<td >Broyage, concassage, criblage, etc des substances végétales</td>
+		<td align="right" >680</td>
+		<td >kW</td>
+	</tr>
+	<tr class="listeEtabl1">
+		<td ><a target="_blank" href="http://www.ineris.fr/aida/textes/nomenclature/rubriques/rub_2910.htm">2910</a></td>
+		<td >&nbsp;</td>
+		<td >05/08/2011</td>
+		<td title="En fonctionnement">En fonct.</td>
+		<td >NC</td>
+		<td >Combustion</td>
+		<td align="right" >1850</td>
+		<td >kW</td>
+	</tr>
+	<tr class="listeEtabl2">
+		<td ><a target="_blank" href="http://www.ineris.fr/aida/textes/nomenclature/rubriques/rub_2920.htm">2920</a></td>
+		<td >&nbsp;</td>
+		<td >05/08/2011</td>
+		<td title="En fonctionnement">En fonct.</td>
+		<td >NC</td>
+		<td >Réfrigération ou compression (installation de) pression >10E5 Pa</td>
+		<td align="right" >25</td>
+		<td >kW</td>
+	</tr>
+</table></div><br>
+
+<h2>Textes publics disponibles</h2>
+<br /><div class="listeEtabl"><table cellpadding="2px" class="listeEtabl" summary="liste des documents disponibles" border="1">
+	<tr class="listeEtablenTete">
+		<th title="Date">Date</td>
+		<th title="Type">Type</td>
+		<th title="Description">Description</td>
+	</tr>
+	<tr class="listeEtabl1">
+		<td>05/08/2011</td>		<td>Arrêté préfectoral</td>		<td><a target="_new" href="http://documents.installationsclassees.developpement-durable.gouv.fr/commun/V/2/8c64eda7d88c47d384425b36fc010cb2.pdf">AP complémentaire (Art. R. 512-31)</a></td>	</tr>	<tr class="listeEtabl2">
+		<td>06/01/2006</td>		<td>Arrêté préfectoral</td>		<td><a target="_new" href="http://documents.installationsclassees.developpement-durable.gouv.fr/commun/V/3/08f317eaba5c413b880b0748c1974943.pdf">Levée de la procédure de consignation</a></td>	</tr>	<tr class="listeEtabl1">
+		<td>22/08/2005</td>		<td>Arrêté préfectoral</td>		<td><a target="_new" href="http://documents.installationsclassees.developpement-durable.gouv.fr/commun/V/f/fb91450fc56d48bca943d446eee4875f.pdf">Consignation suite non respect de la mise en demeure du 15.12.03</a></td>	</tr></table></div><br>
+<br><br>
+<a href="#" onclick="afficherPageRecherche()">Retour aux résultats de la recherche</a><br><br>
+
+
+</div>
+</form>
+</div>
+<div class="spacer">&nbsp;</div>
+</div>
+<div id="divPiedPage">
+<div id="liensPiedPage">
+	<a href="http://www.ecologie.gouv.fr" target="_blank" class="divPiedPage">Site du Ministère de la Transition écologique et solidaire
+</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+	<a href="/contact.php" class="divPiedPage">Ecrivez-nous </a>  
+	&nbsp;&nbsp;<a class="divPiedPage" href="/plan.php">Plan du site</a> 
+	&nbsp;&nbsp;<a class="divPiedPage" href="/infosLegales.php">Infos légales</a>
+</div>
+<div id="divPiedPageDroit"></div><div id="divPiedPageGauche"></div></div>
+</div>
+</div>
+</body>
+</html>

@@ -1,3 +1,11 @@
+stages:
+  - build
+  - test
+services:
+  - name: mariadb
+    alias: mysql
+
+
 build:
   image: docker
   stage: build
@@ -6,4 +14,17 @@ build:
      - docker build --pull -t "${CI_REGISTRY_IMAGE}:${CI_BUILD_REF_NAME}" .
      - docker push "${CI_REGISTRY_IMAGE}:${CI_BUILD_REF_NAME}"
 
+test:
+  image: "${CI_REGISTRY_IMAGE}:${CI_BUILD_REF_NAME}"
+  script:
+     - cd /opt/app
+     - export DATABASE_TYPE=mysql DATABASE_DSN="mysql:host=mysql;dbname=$MYSQL_DATABASE"
+     - export DATABASE_USER=root DATABASE_PASSWORD=$MYSQL_ROOT_PASSWORD
+     - bash scripts/setup.sh install_only
+     - cat propel.xml
+     - vendor/bin/propel sql:build
+     - vendor/bin/propel sql:insert
 
+variables:
+  MYSQL_DATABASE: cedric
+  MYSQL_ROOT_PASSWORD: coin
