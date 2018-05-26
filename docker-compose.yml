@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+   mysql:
+        image: mysql:5.7
+        environment:
+          MYSQL_DATABASE: cedric
+          MYSQL_ROOT_PASSWORD: coin
+
+   www:
+        image: gitlab.damiens.info:444/nicolas/cedric:test
+        environment:
+          DATABASE_TYPE: mysql
+          DATABASE_DSN: mysql:host=mysql
+          DATABASE_USER: root
+          DATABASE_PASSWORD: coin
+        volumes:
+          - ./composer.lock:/opt/app/composer.lock
+          - ./composer.json:/opt/app/composer.json
+          - ./src:/opt/app/src
