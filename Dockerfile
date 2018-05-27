@@ -6,3 +6,5 @@ ADD src src
 ADD composer.json composer.lock propel.xml.dist schema.xml bootstrap.php /opt/app/
 RUN composer install -o -q -n
 CMD ["bash", "scripts/setup.sh"]
+ADD tests tests
+ADD phpunit.xml /opt/app
