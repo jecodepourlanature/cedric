@@ -101,16 +101,18 @@ class Source {
   public function saveCategories(InstallationClassee $ic, array $cats) {
     $catsInDb = InstallationClasseeCategorieQuery::create()->filterByInstallationId($ic->getId())->find();
     $hashInDb = [];
-    echo "cats => ".count($catsInDb)."\n";
+    //echo "cats => ".count($catsInDb)."\n";
     foreach ($catsInDb as $catDb) {
       $hashInDb[] = $catDb->getId();
     }
     $hashDejaPresent = [];
+    $n_new = 0;
     foreach ($cats as $cat) {
       if (in_array($cat->getId(),$hashInDb)) {
         $hashDejaPresent[] = $cat->getId();
         continue;
       } else {
+        $n_new += 1;
         $cat->setInstallationClassee($ic);
         $cat->save();
       }
@@ -119,6 +121,7 @@ class Source {
     foreach ($toDelete as $cat) {
       $cat->delete();
     }
+    return [count($hashInDb), $n_new];
   }
 
   public function saveDocuments(InstallationClassee $ic, array $docs) {
@@ -127,6 +130,7 @@ class Source {
     foreach ($docsInDb as $doc) {
       $hashInDb[] = $doc->getId();
     }
+    $n_new = 0;
     foreach ($docs as $doc) {
       if (in_array($doc->getId(), $hashInDb)) {
         continue;
@@ -134,12 +138,29 @@ class Source {
       // FIXME notification
       $doc->setInstallationClassee($ic);
       $doc->save();
+      $n_new += 1;
     }
+    return [count($hashInDb), $n_new];
   }
 
   public function parseFicheHtml(string $htmlstring) {
     $doc = new \DOMDocument();
-    $doc->loadHTML($htmlstring);
+
+    // il y a des lignes de tableau qui commencent avec un th et termine
+    // avec un td, comme elle sont facile a repérer on va les corriger
+    $lignes = explode("\n", $htmlstring);
+    $htmlstring2 = "";
+    $n = 0;
+    foreach ($lignes as $ligne) {
+      $n++;
+      if (preg_match("/<th .*>(.*)<\/td>/", $ligne, $m)) {
+        $htmlstring2 .= "<th>{$m[1]}</th>\n";
+      } else {
+        $htmlstring2 .= $ligne."\n";
+      }
+    }
+    $doc->loadHTML($htmlstring2, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
     // cherche la <div> centre
     $centre = $doc->getElementById("centre");
 
