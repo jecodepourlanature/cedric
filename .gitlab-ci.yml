@@ -24,6 +24,7 @@ test:
      - cat propel.xml
      - vendor/bin/propel sql:build
      - vendor/bin/propel sql:insert
+     - vendor/bin/phpunit
 
 variables:
   MYSQL_DATABASE: cedric
