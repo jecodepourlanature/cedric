@@ -22,6 +22,7 @@ test:
      - export DATABASE_USER=root DATABASE_PASSWORD=$MYSQL_ROOT_PASSWORD
      - bash scripts/setup.sh install_only
      - cat propel.xml
+     - vendor/bin/propel config:convert
      - vendor/bin/propel sql:build
      - vendor/bin/propel sql:insert
      - vendor/bin/phpunit
