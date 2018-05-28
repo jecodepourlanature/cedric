@@ -8,3 +8,4 @@ RUN composer install -o -q -n
 CMD ["bash", "scripts/setup.sh"]
 ADD tests tests
 ADD phpunit.xml /opt/app
+ADD drop_and_run.sh /opt/app

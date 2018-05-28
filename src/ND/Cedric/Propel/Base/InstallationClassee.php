@@ -1116,16 +1116,16 @@ abstract class InstallationClassee implements ActiveRecordInterface
                         $stmt->bindValue($identifier, $this->regime, PDO::PARAM_STR);
                         break;
                     case 'seveso':
-                        $stmt->bindValue($identifier, $this->seveso, PDO::PARAM_BOOL);
+                        $stmt->bindValue($identifier, (int) $this->seveso, PDO::PARAM_INT);
                         break;
                     case 'etat_activite':
                         $stmt->bindValue($identifier, $this->etat_activite, PDO::PARAM_STR);
                         break;
                     case 'priorite_nationale':
-                        $stmt->bindValue($identifier, $this->priorite_nationale, PDO::PARAM_BOOL);
+                        $stmt->bindValue($identifier, (int) $this->priorite_nationale, PDO::PARAM_INT);
                         break;
                     case 'IEDMTD':
-                        $stmt->bindValue($identifier, $this->iedmtd, PDO::PARAM_BOOL);
+                        $stmt->bindValue($identifier, (int) $this->iedmtd, PDO::PARAM_INT);
                         break;
                 }
             }
