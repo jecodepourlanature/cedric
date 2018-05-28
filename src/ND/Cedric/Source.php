@@ -124,7 +124,7 @@ class Source {
     return [count($hashInDb), $n_new];
   }
 
-  public function saveDocuments(InstallationClassee $ic, array $docs) {
+  public function saveDocuments(InstallationClassee $ic, array $docs, $nouveau = true) {
     $docsInDb = InstallationDocQuery::create()->filterByInstallationId($ic->getId());
     $hashInDb = [];
     foreach ($docsInDb as $doc) {
@@ -137,6 +137,7 @@ class Source {
       }
       // FIXME notification
       $doc->setInstallationClassee($ic);
+      $doc->setNouveau($nouveau);
       $doc->save();
       $n_new += 1;
     }

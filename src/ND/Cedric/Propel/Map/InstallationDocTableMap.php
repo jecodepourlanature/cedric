@@ -59,7 +59,7 @@ class InstallationDocTableMap extends TableMap
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 7;
+    const NUM_COLUMNS = 8;
 
     /**
      * The number of lazy-loaded columns
@@ -69,7 +69,7 @@ class InstallationDocTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 7;
+    const NUM_HYDRATE_COLUMNS = 8;
 
     /**
      * the column name for the id field
@@ -107,6 +107,11 @@ class InstallationDocTableMap extends TableMap
     const COL_DESCRIPTION = 'installation_docs.description';
 
     /**
+     * the column name for the nouveau field
+     */
+    const COL_NOUVEAU = 'installation_docs.nouveau';
+
+    /**
      * The default string format for model objects of the related table
      */
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -118,11 +123,11 @@ class InstallationDocTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('Id', 'DateDoc', 'InstallationId', 'TypeDoc', 'UrlDoc', 'TitreDoc', 'Description', ),
-        self::TYPE_CAMELNAME     => array('id', 'dateDoc', 'installationId', 'typeDoc', 'urlDoc', 'titreDoc', 'description', ),
-        self::TYPE_COLNAME       => array(InstallationDocTableMap::COL_ID, InstallationDocTableMap::COL_DATE_DOC, InstallationDocTableMap::COL_INSTALLATION_ID, InstallationDocTableMap::COL_TYPE_DOC, InstallationDocTableMap::COL_URL_DOC, InstallationDocTableMap::COL_TITRE_DOC, InstallationDocTableMap::COL_DESCRIPTION, ),
-        self::TYPE_FIELDNAME     => array('id', 'date_doc', 'installation_id', 'type_doc', 'url_doc', 'titre_doc', 'description', ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, )
+        self::TYPE_PHPNAME       => array('Id', 'DateDoc', 'InstallationId', 'TypeDoc', 'UrlDoc', 'TitreDoc', 'Description', 'Nouveau', ),
+        self::TYPE_CAMELNAME     => array('id', 'dateDoc', 'installationId', 'typeDoc', 'urlDoc', 'titreDoc', 'description', 'nouveau', ),
+        self::TYPE_COLNAME       => array(InstallationDocTableMap::COL_ID, InstallationDocTableMap::COL_DATE_DOC, InstallationDocTableMap::COL_INSTALLATION_ID, InstallationDocTableMap::COL_TYPE_DOC, InstallationDocTableMap::COL_URL_DOC, InstallationDocTableMap::COL_TITRE_DOC, InstallationDocTableMap::COL_DESCRIPTION, InstallationDocTableMap::COL_NOUVEAU, ),
+        self::TYPE_FIELDNAME     => array('id', 'date_doc', 'installation_id', 'type_doc', 'url_doc', 'titre_doc', 'description', 'nouveau', ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, )
     );
 
     /**
@@ -132,11 +137,11 @@ class InstallationDocTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('Id' => 0, 'DateDoc' => 1, 'InstallationId' => 2, 'TypeDoc' => 3, 'UrlDoc' => 4, 'TitreDoc' => 5, 'Description' => 6, ),
-        self::TYPE_CAMELNAME     => array('id' => 0, 'dateDoc' => 1, 'installationId' => 2, 'typeDoc' => 3, 'urlDoc' => 4, 'titreDoc' => 5, 'description' => 6, ),
-        self::TYPE_COLNAME       => array(InstallationDocTableMap::COL_ID => 0, InstallationDocTableMap::COL_DATE_DOC => 1, InstallationDocTableMap::COL_INSTALLATION_ID => 2, InstallationDocTableMap::COL_TYPE_DOC => 3, InstallationDocTableMap::COL_URL_DOC => 4, InstallationDocTableMap::COL_TITRE_DOC => 5, InstallationDocTableMap::COL_DESCRIPTION => 6, ),
-        self::TYPE_FIELDNAME     => array('id' => 0, 'date_doc' => 1, 'installation_id' => 2, 'type_doc' => 3, 'url_doc' => 4, 'titre_doc' => 5, 'description' => 6, ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, )
+        self::TYPE_PHPNAME       => array('Id' => 0, 'DateDoc' => 1, 'InstallationId' => 2, 'TypeDoc' => 3, 'UrlDoc' => 4, 'TitreDoc' => 5, 'Description' => 6, 'Nouveau' => 7, ),
+        self::TYPE_CAMELNAME     => array('id' => 0, 'dateDoc' => 1, 'installationId' => 2, 'typeDoc' => 3, 'urlDoc' => 4, 'titreDoc' => 5, 'description' => 6, 'nouveau' => 7, ),
+        self::TYPE_COLNAME       => array(InstallationDocTableMap::COL_ID => 0, InstallationDocTableMap::COL_DATE_DOC => 1, InstallationDocTableMap::COL_INSTALLATION_ID => 2, InstallationDocTableMap::COL_TYPE_DOC => 3, InstallationDocTableMap::COL_URL_DOC => 4, InstallationDocTableMap::COL_TITRE_DOC => 5, InstallationDocTableMap::COL_DESCRIPTION => 6, InstallationDocTableMap::COL_NOUVEAU => 7, ),
+        self::TYPE_FIELDNAME     => array('id' => 0, 'date_doc' => 1, 'installation_id' => 2, 'type_doc' => 3, 'url_doc' => 4, 'titre_doc' => 5, 'description' => 6, 'nouveau' => 7, ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, )
     );
 
     /**
@@ -163,6 +168,7 @@ class InstallationDocTableMap extends TableMap
         $this->addColumn('url_doc', 'UrlDoc', 'VARCHAR', false, 255, null);
         $this->addColumn('titre_doc', 'TitreDoc', 'VARCHAR', false, 250, null);
         $this->addColumn('description', 'Description', 'VARCHAR', false, 255, null);
+        $this->addColumn('nouveau', 'Nouveau', 'BOOLEAN', false, 1, false);
     } // initialize()
 
     /**
@@ -389,6 +395,7 @@ class InstallationDocTableMap extends TableMap
             $criteria->addSelectColumn(InstallationDocTableMap::COL_URL_DOC);
             $criteria->addSelectColumn(InstallationDocTableMap::COL_TITRE_DOC);
             $criteria->addSelectColumn(InstallationDocTableMap::COL_DESCRIPTION);
+            $criteria->addSelectColumn(InstallationDocTableMap::COL_NOUVEAU);
         } else {
             $criteria->addSelectColumn($alias . '.id');
             $criteria->addSelectColumn($alias . '.date_doc');
@@ -397,6 +404,7 @@ class InstallationDocTableMap extends TableMap
             $criteria->addSelectColumn($alias . '.url_doc');
             $criteria->addSelectColumn($alias . '.titre_doc');
             $criteria->addSelectColumn($alias . '.description');
+            $criteria->addSelectColumn($alias . '.nouveau');
         }
     }
 

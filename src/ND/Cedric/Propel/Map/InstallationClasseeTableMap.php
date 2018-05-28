@@ -177,10 +177,10 @@ class InstallationClasseeTableMap extends TableMap
         $this->addColumn('commune', 'Commune', 'VARCHAR', false, 255, null);
         $this->addColumn('departement', 'Departement', 'VARCHAR', false, 3, null);
         $this->addColumn('regime', 'Regime', 'VARCHAR', false, 20, null);
-        $this->addColumn('seveso', 'Seveso', 'BOOLEAN', false, null, null);
+        $this->addColumn('seveso', 'Seveso', 'BOOLEAN', false, 1, null);
         $this->addColumn('etat_activite', 'EtatActivite', 'VARCHAR', false, 50, null);
-        $this->addColumn('priorite_nationale', 'PrioriteNationale', 'BOOLEAN', false, null, null);
-        $this->addColumn('IEDMTD', 'Iedmtd', 'BOOLEAN', false, null, null);
+        $this->addColumn('priorite_nationale', 'PrioriteNationale', 'BOOLEAN', false, 1, null);
+        $this->addColumn('IEDMTD', 'Iedmtd', 'BOOLEAN', false, 1, null);
     } // initialize()
 
     /**
