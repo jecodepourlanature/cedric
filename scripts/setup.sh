@@ -33,5 +33,8 @@ if [ "$1" == "install_only" ]; then
 	exit 0;
 else
 	vendor/bin/propel config:convert
+        cp -a vendor/components/bootstrap/css www/
+        cp -a vendor/components/bootstrap/js www/
+        cp -a vendor/components/jquery/jquery.min.* www/js/
 	/usr/local/bin/boot
 fi

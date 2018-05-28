@@ -23,5 +23,6 @@ services:
           - ./scripts:/opt/app/scripts
           - ./vendor:/opt/app/vendor
           - ./www:/opt/app/www
+          - ./templates:/opt/app/templates
         ports:
           - "9985:80"
