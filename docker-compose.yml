@@ -21,5 +21,7 @@ services:
           - ./phpunit.xml:/opt/app/phpunit.xml
           - ./schema.xml:/opt/app/schema.xml
           - ./scripts:/opt/app/scripts
+          - ./vendor:/opt/app/vendor
+          - ./www:/opt/app/www
         ports:
           - "9985:80"

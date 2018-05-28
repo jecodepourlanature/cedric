@@ -20,12 +20,12 @@ namespace ND\Cedric;
 class Cedric extends \Slim\App {
     public function setup() {
       // Get container
-      $container = $app->getContainer();
+      $container = $this->getContainer();
 
       // Register component on container
       $container['view'] = function ($container) {
-          $view = new \Slim\Views\Twig('path/to/templates', [
-              'cache' => 'path/to/cache'
+          $view = new \Slim\Views\Twig(__DIR__."/opt/app/templates/", [
+              'cache' => '/tmp/'
           ]);
 
           // Instantiate and add Slim specific extension

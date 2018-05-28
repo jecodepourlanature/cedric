@@ -9,3 +9,4 @@ CMD ["bash", "scripts/setup.sh"]
 ADD tests tests
 ADD phpunit.xml /opt/app
 ADD drop_and_run.sh /opt/app
+ADD www /opt/app/www
