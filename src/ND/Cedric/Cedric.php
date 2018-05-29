@@ -30,7 +30,7 @@ class Cedric extends \Slim\App {
 	// Register component on container
 	$container['view'] = function ($container) {
 	    $view = new \Slim\Views\Twig("/opt/app/templates/", [
-		'cache' => '/tmp/'
+		'cache' => false
 	    ]);
 
 	    // Instantiate and add Slim specific extension
