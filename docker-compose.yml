@@ -24,5 +24,6 @@ services:
           - ./vendor:/opt/app/vendor
           - ./www:/opt/app/www
           - ./templates:/opt/app/templates
+          - ./res:/opt/app/res
         ports:
           - "9985:80"
