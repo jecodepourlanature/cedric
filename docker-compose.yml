@@ -19,3 +19,11 @@ services:
           - ./src:/opt/app/src
           - ./tests:/opt/app/tests
           - ./phpunit.xml:/opt/app/phpunit.xml
+          - ./schema.xml:/opt/app/schema.xml
+          - ./scripts:/opt/app/scripts
+          - ./vendor:/opt/app/vendor
+          - ./www:/opt/app/www
+          - ./templates:/opt/app/templates
+          - ./res:/opt/app/res
+        ports:
+          - "9985:80"

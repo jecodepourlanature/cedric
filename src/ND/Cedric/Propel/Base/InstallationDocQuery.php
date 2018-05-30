@@ -27,6 +27,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildInstallationDocQuery orderByUrlDoc($order = Criteria::ASC) Order by the url_doc column
  * @method     ChildInstallationDocQuery orderByTitreDoc($order = Criteria::ASC) Order by the titre_doc column
  * @method     ChildInstallationDocQuery orderByDescription($order = Criteria::ASC) Order by the description column
+ * @method     ChildInstallationDocQuery orderByNouveau($order = Criteria::ASC) Order by the nouveau column
  *
  * @method     ChildInstallationDocQuery groupById() Group by the id column
  * @method     ChildInstallationDocQuery groupByDateDoc() Group by the date_doc column
@@ -35,6 +36,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildInstallationDocQuery groupByUrlDoc() Group by the url_doc column
  * @method     ChildInstallationDocQuery groupByTitreDoc() Group by the titre_doc column
  * @method     ChildInstallationDocQuery groupByDescription() Group by the description column
+ * @method     ChildInstallationDocQuery groupByNouveau() Group by the nouveau column
  *
  * @method     ChildInstallationDocQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     ChildInstallationDocQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -65,7 +67,8 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildInstallationDoc findOneByTypeDoc(string $type_doc) Return the first ChildInstallationDoc filtered by the type_doc column
  * @method     ChildInstallationDoc findOneByUrlDoc(string $url_doc) Return the first ChildInstallationDoc filtered by the url_doc column
  * @method     ChildInstallationDoc findOneByTitreDoc(string $titre_doc) Return the first ChildInstallationDoc filtered by the titre_doc column
- * @method     ChildInstallationDoc findOneByDescription(string $description) Return the first ChildInstallationDoc filtered by the description column *
+ * @method     ChildInstallationDoc findOneByDescription(string $description) Return the first ChildInstallationDoc filtered by the description column
+ * @method     ChildInstallationDoc findOneByNouveau(boolean $nouveau) Return the first ChildInstallationDoc filtered by the nouveau column *
 
  * @method     ChildInstallationDoc requirePk($key, ConnectionInterface $con = null) Return the ChildInstallationDoc by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildInstallationDoc requireOne(ConnectionInterface $con = null) Return the first ChildInstallationDoc matching the query and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -77,6 +80,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildInstallationDoc requireOneByUrlDoc(string $url_doc) Return the first ChildInstallationDoc filtered by the url_doc column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildInstallationDoc requireOneByTitreDoc(string $titre_doc) Return the first ChildInstallationDoc filtered by the titre_doc column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildInstallationDoc requireOneByDescription(string $description) Return the first ChildInstallationDoc filtered by the description column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildInstallationDoc requireOneByNouveau(boolean $nouveau) Return the first ChildInstallationDoc filtered by the nouveau column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildInstallationDoc[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildInstallationDoc objects based on current ModelCriteria
  * @method     ChildInstallationDoc[]|ObjectCollection findById(string $id) Return ChildInstallationDoc objects filtered by the id column
@@ -86,6 +90,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildInstallationDoc[]|ObjectCollection findByUrlDoc(string $url_doc) Return ChildInstallationDoc objects filtered by the url_doc column
  * @method     ChildInstallationDoc[]|ObjectCollection findByTitreDoc(string $titre_doc) Return ChildInstallationDoc objects filtered by the titre_doc column
  * @method     ChildInstallationDoc[]|ObjectCollection findByDescription(string $description) Return ChildInstallationDoc objects filtered by the description column
+ * @method     ChildInstallationDoc[]|ObjectCollection findByNouveau(boolean $nouveau) Return ChildInstallationDoc objects filtered by the nouveau column
  * @method     ChildInstallationDoc[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  *
  */
@@ -184,7 +189,7 @@ abstract class InstallationDocQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT id, date_doc, installation_id, type_doc, url_doc, titre_doc, description FROM installation_docs WHERE id = :p0 AND installation_id = :p1';
+        $sql = 'SELECT id, date_doc, installation_id, type_doc, url_doc, titre_doc, description, nouveau FROM installation_docs WHERE id = :p0 AND installation_id = :p1';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key[0], PDO::PARAM_STR);
@@ -477,6 +482,33 @@ abstract class InstallationDocQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(InstallationDocTableMap::COL_DESCRIPTION, $description, $comparison);
+    }
+
+    /**
+     * Filter the query on the nouveau column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByNouveau(true); // WHERE nouveau = true
+     * $query->filterByNouveau('yes'); // WHERE nouveau = true
+     * </code>
+     *
+     * @param     boolean|string $nouveau The value to use as filter.
+     *              Non-boolean arguments are converted using the following rules:
+     *                * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *                * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     *              Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildInstallationDocQuery The current query, for fluid interface
+     */
+    public function filterByNouveau($nouveau = null, $comparison = null)
+    {
+        if (is_string($nouveau)) {
+            $nouveau = in_array(strtolower($nouveau), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+        }
+
+        return $this->addUsingAlias(InstallationDocTableMap::COL_NOUVEAU, $nouveau, $comparison);
     }
 
     /**

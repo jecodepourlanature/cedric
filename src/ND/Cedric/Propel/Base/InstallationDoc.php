@@ -113,6 +113,14 @@ abstract class InstallationDoc implements ActiveRecordInterface
     protected $description;
 
     /**
+     * The value for the nouveau field.
+     *
+     * Note: this column has a database default value of: false
+     * @var        boolean
+     */
+    protected $nouveau;
+
+    /**
      * @var        ChildInstallationClassee
      */
     protected $aInstallationClassee;
@@ -126,10 +134,23 @@ abstract class InstallationDoc implements ActiveRecordInterface
     protected $alreadyInSave = false;
 
     /**
+     * Applies default values to this object.
+     * This method should be called from the object's constructor (or
+     * equivalent initialization method).
+     * @see __construct()
+     */
+    public function applyDefaultValues()
+    {
+        $this->nouveau = false;
+    }
+
+    /**
      * Initializes internal state of ND\Cedric\Propel\Base\InstallationDoc object.
+     * @see applyDefaults()
      */
     public function __construct()
     {
+        $this->applyDefaultValues();
     }
 
     /**
@@ -367,7 +388,7 @@ abstract class InstallationDoc implements ActiveRecordInterface
      * @param      string|null $format The date/time format string (either date()-style or strftime()-style).
      *                            If format is NULL, then the raw DateTime object will be returned.
      *
-     * @return string|DateTime Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
+     * @return string|DateTime Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00
      *
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
@@ -428,6 +449,26 @@ abstract class InstallationDoc implements ActiveRecordInterface
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Get the [nouveau] column value.
+     *
+     * @return boolean
+     */
+    public function getNouveau()
+    {
+        return $this->nouveau;
+    }
+
+    /**
+     * Get the [nouveau] column value.
+     *
+     * @return boolean
+     */
+    public function isNouveau()
+    {
+        return $this->getNouveau();
     }
 
     /**
@@ -575,6 +616,34 @@ abstract class InstallationDoc implements ActiveRecordInterface
     } // setDescription()
 
     /**
+     * Sets the value of the [nouveau] column.
+     * Non-boolean arguments are converted using the following rules:
+     *   * 1, '1', 'true',  'on',  and 'yes' are converted to boolean true
+     *   * 0, '0', 'false', 'off', and 'no'  are converted to boolean false
+     * Check on string values is case insensitive (so 'FaLsE' is seen as 'false').
+     *
+     * @param  boolean|integer|string $v The new value
+     * @return $this|\ND\Cedric\Propel\InstallationDoc The current object (for fluent API support)
+     */
+    public function setNouveau($v)
+    {
+        if ($v !== null) {
+            if (is_string($v)) {
+                $v = in_array(strtolower($v), array('false', 'off', '-', 'no', 'n', '0', '')) ? false : true;
+            } else {
+                $v = (boolean) $v;
+            }
+        }
+
+        if ($this->nouveau !== $v) {
+            $this->nouveau = $v;
+            $this->modifiedColumns[InstallationDocTableMap::COL_NOUVEAU] = true;
+        }
+
+        return $this;
+    } // setNouveau()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -584,6 +653,10 @@ abstract class InstallationDoc implements ActiveRecordInterface
      */
     public function hasOnlyDefaultValues()
     {
+            if ($this->nouveau !== false) {
+                return false;
+            }
+
         // otherwise, everything was equal, so return TRUE
         return true;
     } // hasOnlyDefaultValues()
@@ -614,6 +687,9 @@ abstract class InstallationDoc implements ActiveRecordInterface
             $this->id = (null !== $col) ? (string) $col : null;
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 1 + $startcol : InstallationDocTableMap::translateFieldName('DateDoc', TableMap::TYPE_PHPNAME, $indexType)];
+            if ($col === '0000-00-00') {
+                $col = null;
+            }
             $this->date_doc = (null !== $col) ? PropelDateTime::newInstance($col, null, 'DateTime') : null;
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : InstallationDocTableMap::translateFieldName('InstallationId', TableMap::TYPE_PHPNAME, $indexType)];
@@ -630,6 +706,9 @@ abstract class InstallationDoc implements ActiveRecordInterface
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : InstallationDocTableMap::translateFieldName('Description', TableMap::TYPE_PHPNAME, $indexType)];
             $this->description = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 7 + $startcol : InstallationDocTableMap::translateFieldName('Nouveau', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->nouveau = (null !== $col) ? (boolean) $col : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -638,7 +717,7 @@ abstract class InstallationDoc implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 7; // 7 = InstallationDocTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 8; // 8 = InstallationDocTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException(sprintf('Error populating %s object', '\\ND\\Cedric\\Propel\\InstallationDoc'), 0, $e);
@@ -872,6 +951,9 @@ abstract class InstallationDoc implements ActiveRecordInterface
         if ($this->isColumnModified(InstallationDocTableMap::COL_DESCRIPTION)) {
             $modifiedColumns[':p' . $index++]  = 'description';
         }
+        if ($this->isColumnModified(InstallationDocTableMap::COL_NOUVEAU)) {
+            $modifiedColumns[':p' . $index++]  = 'nouveau';
+        }
 
         $sql = sprintf(
             'INSERT INTO installation_docs (%s) VALUES (%s)',
@@ -903,6 +985,9 @@ abstract class InstallationDoc implements ActiveRecordInterface
                         break;
                     case 'description':
                         $stmt->bindValue($identifier, $this->description, PDO::PARAM_STR);
+                        break;
+                    case 'nouveau':
+                        $stmt->bindValue($identifier, (int) $this->nouveau, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -980,6 +1065,9 @@ abstract class InstallationDoc implements ActiveRecordInterface
             case 6:
                 return $this->getDescription();
                 break;
+            case 7:
+                return $this->getNouveau();
+                break;
             default:
                 return null;
                 break;
@@ -1017,6 +1105,7 @@ abstract class InstallationDoc implements ActiveRecordInterface
             $keys[4] => $this->getUrlDoc(),
             $keys[5] => $this->getTitreDoc(),
             $keys[6] => $this->getDescription(),
+            $keys[7] => $this->getNouveau(),
         );
         if ($result[$keys[1]] instanceof \DateTimeInterface) {
             $result[$keys[1]] = $result[$keys[1]]->format('c');
@@ -1098,6 +1187,9 @@ abstract class InstallationDoc implements ActiveRecordInterface
             case 6:
                 $this->setDescription($value);
                 break;
+            case 7:
+                $this->setNouveau($value);
+                break;
         } // switch()
 
         return $this;
@@ -1144,6 +1236,9 @@ abstract class InstallationDoc implements ActiveRecordInterface
         }
         if (array_key_exists($keys[6], $arr)) {
             $this->setDescription($arr[$keys[6]]);
+        }
+        if (array_key_exists($keys[7], $arr)) {
+            $this->setNouveau($arr[$keys[7]]);
         }
     }
 
@@ -1206,6 +1301,9 @@ abstract class InstallationDoc implements ActiveRecordInterface
         }
         if ($this->isColumnModified(InstallationDocTableMap::COL_DESCRIPTION)) {
             $criteria->add(InstallationDocTableMap::COL_DESCRIPTION, $this->description);
+        }
+        if ($this->isColumnModified(InstallationDocTableMap::COL_NOUVEAU)) {
+            $criteria->add(InstallationDocTableMap::COL_NOUVEAU, $this->nouveau);
         }
 
         return $criteria;
@@ -1315,6 +1413,7 @@ abstract class InstallationDoc implements ActiveRecordInterface
         $copyObj->setUrlDoc($this->getUrlDoc());
         $copyObj->setTitreDoc($this->getTitreDoc());
         $copyObj->setDescription($this->getDescription());
+        $copyObj->setNouveau($this->getNouveau());
         if ($makeNew) {
             $copyObj->setNew(true);
         }
@@ -1410,8 +1509,10 @@ abstract class InstallationDoc implements ActiveRecordInterface
         $this->url_doc = null;
         $this->titre_doc = null;
         $this->description = null;
+        $this->nouveau = null;
         $this->alreadyInSave = false;
         $this->clearAllReferences();
+        $this->applyDefaultValues();
         $this->resetModified();
         $this->setNew(true);
         $this->setDeleted(false);

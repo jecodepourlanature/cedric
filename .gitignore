@@ -4,3 +4,6 @@ docs/*
 propel.xml
 vendor
 *.sq3
+/nbproject/private/
+www/css
+www/js
