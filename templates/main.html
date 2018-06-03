@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CEDRIC monitor</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link href="/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div class="navbar navbar-dark bg-dark box-shadow">
+                <div class="container d-flex justify-content-between">
+                    <a href="#" class="navbar-brand d-flex align-items-center">
+                        <!-- <strong>CEDRIC</strong> -->
+                        Suivre les installations classées près de chez vous
+                    </a>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="container bg-light">
+                <div style="height:20px;"></div>
+                {% block main %}{% endblock %}
+            </div>
+        </main>
+        
+        <footer class="text-muted">
+            <div class="container">
+                <p class="float-right">
+                    <a href="#">Back to top</a>
+                </p>
+                <p>Réalisé et hébergé par <a href="https://github.com/jecodepourlanature">jecodepourlanature</a>.</p>                
+            </div>
+        </footer>
+    </body>
+</html>

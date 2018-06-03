@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+{% block main %}
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Liste des abonnements</h1>  
+            <form method="post">
+                <div class="form-group">
+                    <label for="email1">Votre adresse email</label>
+                    <input type="email" name="email" required class="form-control" id="email" aria-describedby="emailHelp" placeholder="Entrez votre adresse email">
+                    <small id="emailHelp" class="form-text text-muted">Nous ne partagerons pas votre adresse.</small>
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyez moi la liste de mes abonnements</button>
+                <a href="/" class="btn btn-secondary">Annuler</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

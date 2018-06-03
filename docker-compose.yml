@@ -27,3 +27,5 @@ services:
           - ./res:/opt/app/res
         ports:
           - "9985:80"
+   redis:
+       image: redis

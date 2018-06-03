@@ -1046,7 +1046,7 @@ abstract class UtilisateurCommunes implements ActiveRecordInterface
         // Add binding for other direction of this n:n relationship.
         // If this object has already been added to the ChildUtilisateur object, it will not be re-added.
         if ($v !== null) {
-            $v->addUtilisateurDepartementsQuery($this);
+            $v->addUtilisateurCommunesQuery($this);
         }
 
 
@@ -1070,7 +1070,7 @@ abstract class UtilisateurCommunes implements ActiveRecordInterface
                 to this object.  This level of coupling may, however, be
                 undesirable since it could result in an only partially populated collection
                 in the referenced object.
-                $this->aUtilisateur->addUtilisateurDepartementsQueries($this);
+                $this->aUtilisateur->addUtilisateurCommunesQueries($this);
              */
         }
 
@@ -1085,7 +1085,7 @@ abstract class UtilisateurCommunes implements ActiveRecordInterface
     public function clear()
     {
         if (null !== $this->aUtilisateur) {
-            $this->aUtilisateur->removeUtilisateurDepartementsQuery($this);
+            $this->aUtilisateur->removeUtilisateurCommunesQuery($this);
         }
         $this->utilisateur_id = null;
         $this->code_insee = null;
