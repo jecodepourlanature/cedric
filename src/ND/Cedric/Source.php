@@ -29,15 +29,20 @@ class Source {
   const URL_LIST = "http://www.installationsclassees.developpement-durable.gouv.fr/ic_export.php";
   const URL_FICHE = "http://www.installationsclassees.developpement-durable.gouv.fr/ficheEtablissement.php";
 
-  public function updateFiche(InstallationClassee $ic) {
+  public function updateFiche(InstallationClassee $ic, $notif_nouveau=false) {
     $client = new Client();
     list($champEtablBase,$champEtablNumero) = explode(".", $ic->getId());
+    error_log("get_fiche for cats ".$ic->getId());
     $response = $client->request("GET", self::URL_FICHE, [
       'query' => [
         "champEtablBase" => $champEtablBase,
         "champEtablNumero" => $champEtablNumero
       ]
     ]);
+    error_log(self::URL_FICHE."?champEtablBase=$champEtablBase&champEtablNumero=$champEtablNumero");
+    $docs_and_cats = $this->parseFicheHtml($response->getBody());
+    $this->saveCategories($ic, $docs_and_cats['cats']);
+    $this->saveDocuments($ic, $docs_and_cats['docs'], $notif_nouveau);
   }
 
   public function extractDocuments(\DOMElement $tableau) {
@@ -79,20 +84,27 @@ class Source {
       }
       $cols = [];
       foreach ($tr->getElementsByTagName("td") as $td) {
-        $cols[] = $td->nodeValue;
+        $cols[] = mb_convert_encoding($td->nodeValue, "UTF-8", "UTF-8");
       }
-      list($rubrique,$alinea,$date_autorisation,$regime,$activite,$volume,$unite) = $cols;
+      //list($rubrique,$alinea,$date_autorisation,$regime,$activite,$volume,$unite) = $cols;
       $id = hash("sha256", join(" ", $cols)." ".$n);
       $n += 1;
       $cat = new InstallationClasseeCategorie();
       $cat->setId($id);
-      $cat->setRubriqueIc($rubrique);
-      $cat->setAlinea($alinea);
-      $cat->setDateAutorisation($date_autorisation);
-      $cat->setRegime($regime);
-      $cat->setActivite($activite);
-      $cat->setVolume($volume);
-      $cat->setUnite($unite);
+      $cat->setRubriqueIc($cols[0]);
+      $cat->setAlinea($cols[1]);
+      try {
+	$cat->setDateAutorisation($cols[2]);
+      } catch (\Exception $e) {
+	  error_log("err: date_autorisation = {$cols[2]}");
+	  print_r($cols);
+	  $cat->setDateAutorisation(null);
+      }
+      $cat->setEtatActivite($cols[3]);
+      $cat->setRegime($cols[4]);
+      $cat->setActivite($cols[5]);
+      $cat->setVolume($cols[6]);
+      $cat->setUnite($cols[7]);
       $cats[$id] = $cat;
     }
     return $cats;
@@ -196,7 +208,14 @@ class Source {
     return $f;
   }
 
-  public function updateDb($sourcePath=null) {
+   /**
+    * Mise à jour de la base
+    * @param type $sourcePath
+    * @param type $notif_nouveau
+    * @return type
+    * @throws \Exception
+    */
+  public function updateDb($sourcePath=null,$notif_nouveau=false) {
     if (is_null($sourcePath)) {
       $sourcePath = $this->downloadList();
     }
@@ -210,6 +229,9 @@ class Source {
     $n = 0;
     $inserts = 0;
     while ($r = fgetcsv($f,'"', ';')) {
+	foreach ($r as $k => $v) {
+	    $r[$k] = mb_convert_encoding($v, "UTF-8", "UTF-8");
+	}
       $r[0] = trim($r[0]);
       $ic = InstallationClasseeQuery::create()->findPK($r[0]);
       if (is_null($ic)) {
@@ -226,8 +248,17 @@ class Source {
       $ic->setEtatActivite($r[7]);
       $ic->setPrioriteNationale($r[8] == "Oui");
       $ic->setIEDMTD($r[9] == "Oui");
-      $ic->save();
+      try {
+	$ic->save();
+      } catch (\Exception $e) {
+	  error_log("erreur import {$r[0]}");
+	  error_log($e->getMessage());
+	  print_r($r);
+	  print_r($e);
+	  exit();
+      }
       $n++;
+      $this->updateFiche($ic, $notif_nouveau);
     }
     return [$n,$inserts];
   }

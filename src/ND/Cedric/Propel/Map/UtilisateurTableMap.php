@@ -153,13 +153,13 @@ class UtilisateurTableMap extends TableMap
     1 => ':id',
   ),
 ), null, null, 'UtilisateurDepartementsQueries', false);
-        $this->addRelation('UtilisateurDepartementsQuery', '\\ND\\Cedric\\Propel\\UtilisateurCommunes', RelationMap::ONE_TO_MANY, array (
+        $this->addRelation('UtilisateurCommunesQuery', '\\ND\\Cedric\\Propel\\UtilisateurCommunes', RelationMap::ONE_TO_MANY, array (
   0 =>
   array (
     0 => ':utilisateur_id',
     1 => ':id',
   ),
-), null, null, 'UtilisateurDepartementsQueries', false);
+), null, null, 'UtilisateurCommunesQueries', false);
     } // buildRelations()
 
     /**

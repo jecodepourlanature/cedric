@@ -46,15 +46,15 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildUtilisateurQuery rightJoinWithUtilisateurDepartementsQuery() Adds a RIGHT JOIN clause and with to the query using the UtilisateurDepartementsQuery relation
  * @method     ChildUtilisateurQuery innerJoinWithUtilisateurDepartementsQuery() Adds a INNER JOIN clause and with to the query using the UtilisateurDepartementsQuery relation
  *
- * @method     ChildUtilisateurQuery leftJoinUtilisateurDepartementsQuery($relationAlias = null) Adds a LEFT JOIN clause to the query using the UtilisateurDepartementsQuery relation
- * @method     ChildUtilisateurQuery rightJoinUtilisateurDepartementsQuery($relationAlias = null) Adds a RIGHT JOIN clause to the query using the UtilisateurDepartementsQuery relation
- * @method     ChildUtilisateurQuery innerJoinUtilisateurDepartementsQuery($relationAlias = null) Adds a INNER JOIN clause to the query using the UtilisateurDepartementsQuery relation
+ * @method     ChildUtilisateurQuery leftJoinUtilisateurCommunesQuery($relationAlias = null) Adds a LEFT JOIN clause to the query using the UtilisateurCommunesQuery relation
+ * @method     ChildUtilisateurQuery rightJoinUtilisateurCommunesQuery($relationAlias = null) Adds a RIGHT JOIN clause to the query using the UtilisateurCommunesQuery relation
+ * @method     ChildUtilisateurQuery innerJoinUtilisateurCommunesQuery($relationAlias = null) Adds a INNER JOIN clause to the query using the UtilisateurCommunesQuery relation
  *
- * @method     ChildUtilisateurQuery joinWithUtilisateurDepartementsQuery($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the UtilisateurDepartementsQuery relation
+ * @method     ChildUtilisateurQuery joinWithUtilisateurCommunesQuery($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the UtilisateurCommunesQuery relation
  *
- * @method     ChildUtilisateurQuery leftJoinWithUtilisateurDepartementsQuery() Adds a LEFT JOIN clause and with to the query using the UtilisateurDepartementsQuery relation
- * @method     ChildUtilisateurQuery rightJoinWithUtilisateurDepartementsQuery() Adds a RIGHT JOIN clause and with to the query using the UtilisateurDepartementsQuery relation
- * @method     ChildUtilisateurQuery innerJoinWithUtilisateurDepartementsQuery() Adds a INNER JOIN clause and with to the query using the UtilisateurDepartementsQuery relation
+ * @method     ChildUtilisateurQuery leftJoinWithUtilisateurCommunesQuery() Adds a LEFT JOIN clause and with to the query using the UtilisateurCommunesQuery relation
+ * @method     ChildUtilisateurQuery rightJoinWithUtilisateurCommunesQuery() Adds a RIGHT JOIN clause and with to the query using the UtilisateurCommunesQuery relation
+ * @method     ChildUtilisateurQuery innerJoinWithUtilisateurCommunesQuery() Adds a INNER JOIN clause and with to the query using the UtilisateurCommunesQuery relation
  *
  * @method     \ND\Cedric\Propel\UtilisateurDepartementsQuery|\ND\Cedric\Propel\UtilisateurCommunesQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
  *
@@ -436,33 +436,33 @@ abstract class UtilisateurQuery extends ModelCriteria
      *
      * @return ChildUtilisateurQuery The current query, for fluid interface
      */
-    public function filterByUtilisateurDepartementsQuery($utilisateurCommunes, $comparison = null)
+    public function filterByUtilisateurCommunesQuery($utilisateurCommunes, $comparison = null)
     {
         if ($utilisateurCommunes instanceof \ND\Cedric\Propel\UtilisateurCommunes) {
             return $this
                 ->addUsingAlias(UtilisateurTableMap::COL_ID, $utilisateurCommunes->getUtilisateurId(), $comparison);
         } elseif ($utilisateurCommunes instanceof ObjectCollection) {
             return $this
-                ->useUtilisateurDepartementsQueryQuery()
+                ->useUtilisateurCommunesQueryQuery()
                 ->filterByPrimaryKeys($utilisateurCommunes->getPrimaryKeys())
                 ->endUse();
         } else {
-            throw new PropelException('filterByUtilisateurDepartementsQuery() only accepts arguments of type \ND\Cedric\Propel\UtilisateurCommunes or Collection');
+            throw new PropelException('filterByUtilisateurCommunesQuery() only accepts arguments of type \ND\Cedric\Propel\UtilisateurCommunes or Collection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the UtilisateurDepartementsQuery relation
+     * Adds a JOIN clause to the query using the UtilisateurCommunesQuery relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return $this|ChildUtilisateurQuery The current query, for fluid interface
      */
-    public function joinUtilisateurDepartementsQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinUtilisateurCommunesQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('UtilisateurDepartementsQuery');
+        $relationMap = $tableMap->getRelation('UtilisateurCommunesQuery');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -477,14 +477,14 @@ abstract class UtilisateurQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'UtilisateurDepartementsQuery');
+            $this->addJoinObject($join, 'UtilisateurCommunesQuery');
         }
 
         return $this;
     }
 
     /**
-     * Use the UtilisateurDepartementsQuery relation UtilisateurCommunes object
+     * Use the UtilisateurCommunesQuery relation UtilisateurCommunes object
      *
      * @see useQuery()
      *
@@ -494,11 +494,11 @@ abstract class UtilisateurQuery extends ModelCriteria
      *
      * @return \ND\Cedric\Propel\UtilisateurCommunesQuery A secondary query class using the current class as primary query
      */
-    public function useUtilisateurDepartementsQueryQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useUtilisateurCommunesQueryQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
     {
         return $this
-            ->joinUtilisateurDepartementsQuery($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'UtilisateurDepartementsQuery', '\ND\Cedric\Propel\UtilisateurCommunesQuery');
+            ->joinUtilisateurCommunesQuery($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'UtilisateurCommunesQuery', '\ND\Cedric\Propel\UtilisateurCommunesQuery');
     }
 
     /**

@@ -97,8 +97,8 @@ abstract class Utilisateur implements ActiveRecordInterface
     /**
      * @var        ObjectCollection|ChildUtilisateurCommunes[] Collection to store aggregation of ChildUtilisateurCommunes objects.
      */
-    protected $collUtilisateurDepartementsQueries;
-    protected $collUtilisateurDepartementsQueriesPartial;
+    protected $collUtilisateurCommunesQueries;
+    protected $collUtilisateurCommunesQueriesPartial;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -118,7 +118,7 @@ abstract class Utilisateur implements ActiveRecordInterface
      * An array of objects scheduled for deletion.
      * @var ObjectCollection|ChildUtilisateurCommunes[]
      */
-    protected $utilisateurDepartementsQueriesScheduledForDeletion = null;
+    protected $utilisateurCommunesQueriesScheduledForDeletion = null;
 
     /**
      * Initializes internal state of ND\Cedric\Propel\Base\Utilisateur object.
@@ -550,7 +550,7 @@ abstract class Utilisateur implements ActiveRecordInterface
 
             $this->collUtilisateurDepartementsQueries = null;
 
-            $this->collUtilisateurDepartementsQueries = null;
+            $this->collUtilisateurCommunesQueries = null;
 
         } // if (deep)
     }
@@ -683,17 +683,17 @@ abstract class Utilisateur implements ActiveRecordInterface
                 }
             }
 
-            if ($this->utilisateurDepartementsQueriesScheduledForDeletion !== null) {
-                if (!$this->utilisateurDepartementsQueriesScheduledForDeletion->isEmpty()) {
+            if ($this->utilisateurCommunesQueriesScheduledForDeletion !== null) {
+                if (!$this->utilisateurCommunesQueriesScheduledForDeletion->isEmpty()) {
                     \ND\Cedric\Propel\UtilisateurCommunesQuery::create()
-                        ->filterByPrimaryKeys($this->utilisateurDepartementsQueriesScheduledForDeletion->getPrimaryKeys(false))
+                        ->filterByPrimaryKeys($this->utilisateurCommunesQueriesScheduledForDeletion->getPrimaryKeys(false))
                         ->delete($con);
-                    $this->utilisateurDepartementsQueriesScheduledForDeletion = null;
+                    $this->utilisateurCommunesQueriesScheduledForDeletion = null;
                 }
             }
 
-            if ($this->collUtilisateurDepartementsQueries !== null) {
-                foreach ($this->collUtilisateurDepartementsQueries as $referrerFK) {
+            if ($this->collUtilisateurCommunesQueries !== null) {
+                foreach ($this->collUtilisateurCommunesQueries as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -881,7 +881,7 @@ abstract class Utilisateur implements ActiveRecordInterface
 
                 $result[$key] = $this->collUtilisateurDepartementsQueries->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
-            if (null !== $this->collUtilisateurDepartementsQueries) {
+            if (null !== $this->collUtilisateurCommunesQueries) {
 
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
@@ -891,10 +891,10 @@ abstract class Utilisateur implements ActiveRecordInterface
                         $key = 'utilisateur_communess';
                         break;
                     default:
-                        $key = 'UtilisateurDepartementsQueries';
+                        $key = 'UtilisateurCommunesQueries';
                 }
 
-                $result[$key] = $this->collUtilisateurDepartementsQueries->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+                $result[$key] = $this->collUtilisateurCommunesQueries->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -1124,9 +1124,9 @@ abstract class Utilisateur implements ActiveRecordInterface
                 }
             }
 
-            foreach ($this->getUtilisateurDepartementsQueries() as $relObj) {
+            foreach ($this->getUtilisateurCommunesQueries() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addUtilisateurDepartementsQuery($relObj->copy($deepCopy));
+                    $copyObj->addUtilisateurCommunesQuery($relObj->copy($deepCopy));
                 }
             }
 
@@ -1175,8 +1175,8 @@ abstract class Utilisateur implements ActiveRecordInterface
             $this->initUtilisateurDepartementsQueries();
             return;
         }
-        if ('UtilisateurDepartementsQuery' == $relationName) {
-            $this->initUtilisateurDepartementsQueries();
+        if ('UtilisateurCommunesQuery' == $relationName) {
+            $this->initUtilisateurCommunesQueries();
             return;
         }
     }
@@ -1410,31 +1410,31 @@ abstract class Utilisateur implements ActiveRecordInterface
     }
 
     /**
-     * Clears out the collUtilisateurDepartementsQueries collection
+     * Clears out the collUtilisateurCommunesQueries collection
      *
      * This does not modify the database; however, it will remove any associated objects, causing
      * them to be refetched by subsequent calls to accessor method.
      *
      * @return void
-     * @see        addUtilisateurDepartementsQueries()
+     * @see        addUtilisateurCommunesQueries()
      */
-    public function clearUtilisateurDepartementsQueries()
+    public function clearUtilisateurCommunesQueries()
     {
-        $this->collUtilisateurDepartementsQueries = null; // important to set this to NULL since that means it is uninitialized
+        $this->collUtilisateurCommunesQueries = null; // important to set this to NULL since that means it is uninitialized
     }
 
     /**
-     * Reset is the collUtilisateurDepartementsQueries collection loaded partially.
+     * Reset is the collUtilisateurCommunesQueries collection loaded partially.
      */
-    public function resetPartialUtilisateurDepartementsQueries($v = true)
+    public function resetPartialUtilisateurCommunesQueries($v = true)
     {
-        $this->collUtilisateurDepartementsQueriesPartial = $v;
+        $this->collUtilisateurCommunesQueriesPartial = $v;
     }
 
     /**
-     * Initializes the collUtilisateurDepartementsQueries collection.
+     * Initializes the collUtilisateurCommunesQueries collection.
      *
-     * By default this just sets the collUtilisateurDepartementsQueries collection to an empty array (like clearcollUtilisateurDepartementsQueries());
+     * By default this just sets the collUtilisateurCommunesQueries collection to an empty array (like clearcollUtilisateurCommunesQueries());
      * however, you may wish to override this method in your stub class to provide setting appropriate
      * to your application -- for example, setting the initial array to the values stored in database.
      *
@@ -1443,16 +1443,16 @@ abstract class Utilisateur implements ActiveRecordInterface
      *
      * @return void
      */
-    public function initUtilisateurDepartementsQueries($overrideExisting = true)
+    public function initUtilisateurCommunesQueries($overrideExisting = true)
     {
-        if (null !== $this->collUtilisateurDepartementsQueries && !$overrideExisting) {
+        if (null !== $this->collUtilisateurCommunesQueries && !$overrideExisting) {
             return;
         }
 
         $collectionClassName = UtilisateurCommunesTableMap::getTableMap()->getCollectionClassName();
 
-        $this->collUtilisateurDepartementsQueries = new $collectionClassName;
-        $this->collUtilisateurDepartementsQueries->setModel('\ND\Cedric\Propel\UtilisateurCommunes');
+        $this->collUtilisateurCommunesQueries = new $collectionClassName;
+        $this->collUtilisateurCommunesQueries->setModel('\ND\Cedric\Propel\UtilisateurCommunes');
     }
 
     /**
@@ -1469,48 +1469,48 @@ abstract class Utilisateur implements ActiveRecordInterface
      * @return ObjectCollection|ChildUtilisateurCommunes[] List of ChildUtilisateurCommunes objects
      * @throws PropelException
      */
-    public function getUtilisateurDepartementsQueries(Criteria $criteria = null, ConnectionInterface $con = null)
+    public function getUtilisateurCommunesQueries(Criteria $criteria = null, ConnectionInterface $con = null)
     {
-        $partial = $this->collUtilisateurDepartementsQueriesPartial && !$this->isNew();
-        if (null === $this->collUtilisateurDepartementsQueries || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collUtilisateurDepartementsQueries) {
+        $partial = $this->collUtilisateurCommunesQueriesPartial && !$this->isNew();
+        if (null === $this->collUtilisateurCommunesQueries || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collUtilisateurCommunesQueries) {
                 // return empty collection
-                $this->initUtilisateurDepartementsQueries();
+                $this->initUtilisateurCommunesQueries();
             } else {
-                $collUtilisateurDepartementsQueries = ChildUtilisateurCommunesQuery::create(null, $criteria)
+                $collUtilisateurCommunesQueries = ChildUtilisateurCommunesQuery::create(null, $criteria)
                     ->filterByUtilisateur($this)
                     ->find($con);
 
                 if (null !== $criteria) {
-                    if (false !== $this->collUtilisateurDepartementsQueriesPartial && count($collUtilisateurDepartementsQueries)) {
-                        $this->initUtilisateurDepartementsQueries(false);
+                    if (false !== $this->collUtilisateurCommunesQueriesPartial && count($collUtilisateurCommunesQueries)) {
+                        $this->initUtilisateurCommunesQueries(false);
 
-                        foreach ($collUtilisateurDepartementsQueries as $obj) {
-                            if (false == $this->collUtilisateurDepartementsQueries->contains($obj)) {
-                                $this->collUtilisateurDepartementsQueries->append($obj);
+                        foreach ($collUtilisateurCommunesQueries as $obj) {
+                            if (false == $this->collUtilisateurCommunesQueries->contains($obj)) {
+                                $this->collUtilisateurCommunesQueries->append($obj);
                             }
                         }
 
-                        $this->collUtilisateurDepartementsQueriesPartial = true;
+                        $this->collUtilisateurCommunesQueriesPartial = true;
                     }
 
-                    return $collUtilisateurDepartementsQueries;
+                    return $collUtilisateurCommunesQueries;
                 }
 
-                if ($partial && $this->collUtilisateurDepartementsQueries) {
-                    foreach ($this->collUtilisateurDepartementsQueries as $obj) {
+                if ($partial && $this->collUtilisateurCommunesQueries) {
+                    foreach ($this->collUtilisateurCommunesQueries as $obj) {
                         if ($obj->isNew()) {
-                            $collUtilisateurDepartementsQueries[] = $obj;
+                            $collUtilisateurCommunesQueries[] = $obj;
                         }
                     }
                 }
 
-                $this->collUtilisateurDepartementsQueries = $collUtilisateurDepartementsQueries;
-                $this->collUtilisateurDepartementsQueriesPartial = false;
+                $this->collUtilisateurCommunesQueries = $collUtilisateurCommunesQueries;
+                $this->collUtilisateurCommunesQueriesPartial = false;
             }
         }
 
-        return $this->collUtilisateurDepartementsQueries;
+        return $this->collUtilisateurCommunesQueries;
     }
 
     /**
@@ -1519,32 +1519,32 @@ abstract class Utilisateur implements ActiveRecordInterface
      * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
      * and new objects from the given Propel collection.
      *
-     * @param      Collection $utilisateurDepartementsQueries A Propel collection.
+     * @param      Collection $utilisateurCommunesQueries A Propel collection.
      * @param      ConnectionInterface $con Optional connection object
      * @return $this|ChildUtilisateur The current object (for fluent API support)
      */
-    public function setUtilisateurDepartementsQueries(Collection $utilisateurDepartementsQueries, ConnectionInterface $con = null)
+    public function setUtilisateurCommunesQueries(Collection $utilisateurCommunesQueries, ConnectionInterface $con = null)
     {
-        /** @var ChildUtilisateurCommunes[] $utilisateurDepartementsQueriesToDelete */
-        $utilisateurDepartementsQueriesToDelete = $this->getUtilisateurDepartementsQueries(new Criteria(), $con)->diff($utilisateurDepartementsQueries);
+        /** @var ChildUtilisateurCommunes[] $utilisateurCommunesQueriesToDelete */
+        $utilisateurCommunesQueriesToDelete = $this->getUtilisateurCommunesQueries(new Criteria(), $con)->diff($utilisateurCommunesQueries);
 
 
         //since at least one column in the foreign key is at the same time a PK
         //we can not just set a PK to NULL in the lines below. We have to store
         //a backup of all values, so we are able to manipulate these items based on the onDelete value later.
-        $this->utilisateurDepartementsQueriesScheduledForDeletion = clone $utilisateurDepartementsQueriesToDelete;
+        $this->utilisateurCommunesQueriesScheduledForDeletion = clone $utilisateurCommunesQueriesToDelete;
 
-        foreach ($utilisateurDepartementsQueriesToDelete as $utilisateurDepartementsQueryRemoved) {
-            $utilisateurDepartementsQueryRemoved->setUtilisateur(null);
+        foreach ($utilisateurCommunesQueriesToDelete as $utilisateurCommunesQueryRemoved) {
+            $utilisateurCommunesQueryRemoved->setUtilisateur(null);
         }
 
-        $this->collUtilisateurDepartementsQueries = null;
-        foreach ($utilisateurDepartementsQueries as $utilisateurDepartementsQuery) {
-            $this->addUtilisateurDepartementsQuery($utilisateurDepartementsQuery);
+        $this->collUtilisateurCommunesQueries = null;
+        foreach ($utilisateurCommunesQueries as $utilisateurCommunesQuery) {
+            $this->addUtilisateurCommunesQuery($utilisateurCommunesQuery);
         }
 
-        $this->collUtilisateurDepartementsQueries = $utilisateurDepartementsQueries;
-        $this->collUtilisateurDepartementsQueriesPartial = false;
+        $this->collUtilisateurCommunesQueries = $utilisateurCommunesQueries;
+        $this->collUtilisateurCommunesQueriesPartial = false;
 
         return $this;
     }
@@ -1558,16 +1558,16 @@ abstract class Utilisateur implements ActiveRecordInterface
      * @return int             Count of related UtilisateurCommunes objects.
      * @throws PropelException
      */
-    public function countUtilisateurDepartementsQueries(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    public function countUtilisateurCommunesQueries(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
     {
-        $partial = $this->collUtilisateurDepartementsQueriesPartial && !$this->isNew();
-        if (null === $this->collUtilisateurDepartementsQueries || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collUtilisateurDepartementsQueries) {
+        $partial = $this->collUtilisateurCommunesQueriesPartial && !$this->isNew();
+        if (null === $this->collUtilisateurCommunesQueries || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collUtilisateurCommunesQueries) {
                 return 0;
             }
 
             if ($partial && !$criteria) {
-                return count($this->getUtilisateurDepartementsQueries());
+                return count($this->getUtilisateurCommunesQueries());
             }
 
             $query = ChildUtilisateurCommunesQuery::create(null, $criteria);
@@ -1580,7 +1580,7 @@ abstract class Utilisateur implements ActiveRecordInterface
                 ->count($con);
         }
 
-        return count($this->collUtilisateurDepartementsQueries);
+        return count($this->collUtilisateurCommunesQueries);
     }
 
     /**
@@ -1590,18 +1590,18 @@ abstract class Utilisateur implements ActiveRecordInterface
      * @param  ChildUtilisateurCommunes $l ChildUtilisateurCommunes
      * @return $this|\ND\Cedric\Propel\Utilisateur The current object (for fluent API support)
      */
-    public function addUtilisateurDepartementsQuery(ChildUtilisateurCommunes $l)
+    public function addUtilisateurCommunesQuery(ChildUtilisateurCommunes $l)
     {
-        if ($this->collUtilisateurDepartementsQueries === null) {
-            $this->initUtilisateurDepartementsQueries();
-            $this->collUtilisateurDepartementsQueriesPartial = true;
+        if ($this->collUtilisateurCommunesQueries === null) {
+            $this->initUtilisateurCommunesQueries();
+            $this->collUtilisateurCommunesQueriesPartial = true;
         }
 
-        if (!$this->collUtilisateurDepartementsQueries->contains($l)) {
-            $this->doAddUtilisateurDepartementsQuery($l);
+        if (!$this->collUtilisateurCommunesQueries->contains($l)) {
+            $this->doAddUtilisateurCommunesQuery($l);
 
-            if ($this->utilisateurDepartementsQueriesScheduledForDeletion and $this->utilisateurDepartementsQueriesScheduledForDeletion->contains($l)) {
-                $this->utilisateurDepartementsQueriesScheduledForDeletion->remove($this->utilisateurDepartementsQueriesScheduledForDeletion->search($l));
+            if ($this->utilisateurCommunesQueriesScheduledForDeletion and $this->utilisateurCommunesQueriesScheduledForDeletion->contains($l)) {
+                $this->utilisateurCommunesQueriesScheduledForDeletion->remove($this->utilisateurCommunesQueriesScheduledForDeletion->search($l));
             }
         }
 
@@ -1609,29 +1609,29 @@ abstract class Utilisateur implements ActiveRecordInterface
     }
 
     /**
-     * @param ChildUtilisateurCommunes $utilisateurDepartementsQuery The ChildUtilisateurCommunes object to add.
+     * @param ChildUtilisateurCommunes $utilisateurCommunesQuery The ChildUtilisateurCommunes object to add.
      */
-    protected function doAddUtilisateurDepartementsQuery(ChildUtilisateurCommunes $utilisateurDepartementsQuery)
+    protected function doAddUtilisateurCommunesQuery(ChildUtilisateurCommunes $utilisateurCommunesQuery)
     {
-        $this->collUtilisateurDepartementsQueries[]= $utilisateurDepartementsQuery;
-        $utilisateurDepartementsQuery->setUtilisateur($this);
+        $this->collUtilisateurCommunesQueries[]= $utilisateurCommunesQuery;
+        $utilisateurCommunesQuery->setUtilisateur($this);
     }
 
     /**
-     * @param  ChildUtilisateurCommunes $utilisateurDepartementsQuery The ChildUtilisateurCommunes object to remove.
+     * @param  ChildUtilisateurCommunes $utilisateurCommunesQuery The ChildUtilisateurCommunes object to remove.
      * @return $this|ChildUtilisateur The current object (for fluent API support)
      */
-    public function removeUtilisateurDepartementsQuery(ChildUtilisateurCommunes $utilisateurDepartementsQuery)
+    public function removeUtilisateurCommunesQuery(ChildUtilisateurCommunes $utilisateurCommunesQuery)
     {
-        if ($this->getUtilisateurDepartementsQueries()->contains($utilisateurDepartementsQuery)) {
-            $pos = $this->collUtilisateurDepartementsQueries->search($utilisateurDepartementsQuery);
-            $this->collUtilisateurDepartementsQueries->remove($pos);
-            if (null === $this->utilisateurDepartementsQueriesScheduledForDeletion) {
-                $this->utilisateurDepartementsQueriesScheduledForDeletion = clone $this->collUtilisateurDepartementsQueries;
-                $this->utilisateurDepartementsQueriesScheduledForDeletion->clear();
+        if ($this->getUtilisateurCommunesQueries()->contains($utilisateurCommunesQuery)) {
+            $pos = $this->collUtilisateurCommunesQueries->search($utilisateurCommunesQuery);
+            $this->collUtilisateurCommunesQueries->remove($pos);
+            if (null === $this->utilisateurCommunesQueriesScheduledForDeletion) {
+                $this->utilisateurCommunesQueriesScheduledForDeletion = clone $this->collUtilisateurCommunesQueries;
+                $this->utilisateurCommunesQueriesScheduledForDeletion->clear();
             }
-            $this->utilisateurDepartementsQueriesScheduledForDeletion[]= clone $utilisateurDepartementsQuery;
-            $utilisateurDepartementsQuery->setUtilisateur(null);
+            $this->utilisateurCommunesQueriesScheduledForDeletion[]= clone $utilisateurCommunesQuery;
+            $utilisateurCommunesQuery->setUtilisateur(null);
         }
 
         return $this;
@@ -1670,15 +1670,15 @@ abstract class Utilisateur implements ActiveRecordInterface
                     $o->clearAllReferences($deep);
                 }
             }
-            if ($this->collUtilisateurDepartementsQueries) {
-                foreach ($this->collUtilisateurDepartementsQueries as $o) {
+            if ($this->collUtilisateurCommunesQueries) {
+                foreach ($this->collUtilisateurCommunesQueries as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
         } // if ($deep)
 
         $this->collUtilisateurDepartementsQueries = null;
-        $this->collUtilisateurDepartementsQueries = null;
+        $this->collUtilisateurCommunesQueries = null;
     }
 
     /**
